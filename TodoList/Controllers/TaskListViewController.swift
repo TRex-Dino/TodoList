@@ -47,30 +47,14 @@ class TaskListViewController: UITableViewController {
     }
     
     @objc private func addNewTask() {
-        showAlert(with: "New Task", and: "What do you want to do?")
-        
-    }
-    
-    private func showAlert(with title: String, and message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
-            guard let task = alert.textFields?.first?.text, !task.isEmpty else { return }
+        showAlert(with: "Add new Task", and: "What do you want to do?") { task in
             StoreManager.shared.save(data: task)
             self.taskList = StoreManager.shared.fetchData()
             
             let cellIndex = IndexPath(row: self.taskList.count - 1, section: 0)
             self.tableView.insertRows(at: [cellIndex], with: .automatic)
-            
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        alert.addTextField { textField in
-            textField.placeholder = "New Task"
-        }
-        present(alert, animated: true)
     }
-    
 }
 
 //MARK: - UITableViewDataSource
@@ -98,6 +82,13 @@ extension TaskListViewController {
             let task = taskList.remove(at: indexPath.row)
             StoreManager.shared.delete(data: task)
             tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        showAlert(with: "Edit task", and: "What do you need to change?") { task in
+            StoreManager.shared.edit(in: task, at: indexPath.row)
+            tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }
 }

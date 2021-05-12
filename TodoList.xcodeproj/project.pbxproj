@@ -13,6 +13,7 @@
 		0A8AF2B7264BDD12006331E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8AF2B6264BDD12006331E6 /* Assets.xcassets */; };
 		0A8AF2BA264BDD12006331E6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8AF2B8264BDD12006331E6 /* LaunchScreen.storyboard */; };
 		0AFFA33E264C1C5000AC1FB6 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFFA33D264C1C5000AC1FB6 /* StoreManager.swift */; };
+		0AFFA345264C5A2100AC1FB6 /* TaskListViewController+alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AFFA344264C5A2100AC1FB6 /* TaskListViewController+alert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0A8AF2B9264BDD12006331E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A8AF2BB264BDD12006331E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0AFFA33D264C1C5000AC1FB6 /* StoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		0AFFA344264C5A2100AC1FB6 /* TaskListViewController+alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TaskListViewController+alert.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,56 @@
 		0A8AF2A9264BDD11006331E6 /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
+				0AFFA33F264C590A00AC1FB6 /* Supporting */,
+				0AFFA340264C59A700AC1FB6 /* Controllers */,
+				0AFFA341264C59CA00AC1FB6 /* Managers */,
+				0AFFA343264C59E500AC1FB6 /* Resources */,
+				0AFFA342264C59D400AC1FB6 /* Storyboards */,
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
+		0AFFA33F264C590A00AC1FB6 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
 				0A8AF2AA264BDD11006331E6 /* AppDelegate.swift */,
-				0A8AF2AE264BDD11006331E6 /* TaskListViewController.swift */,
-				0AFFA33D264C1C5000AC1FB6 /* StoreManager.swift */,
-				0A8AF2B6264BDD12006331E6 /* Assets.xcassets */,
-				0A8AF2B8264BDD12006331E6 /* LaunchScreen.storyboard */,
 				0A8AF2BB264BDD12006331E6 /* Info.plist */,
 				0A8AF2B3264BDD11006331E6 /* TodoList.xcdatamodeld */,
 			);
-			path = TodoList;
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		0AFFA340264C59A700AC1FB6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AF2AE264BDD11006331E6 /* TaskListViewController.swift */,
+				0AFFA344264C5A2100AC1FB6 /* TaskListViewController+alert.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		0AFFA341264C59CA00AC1FB6 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0AFFA33D264C1C5000AC1FB6 /* StoreManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		0AFFA342264C59D400AC1FB6 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AF2B8264BDD12006331E6 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		0AFFA343264C59E500AC1FB6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0A8AF2B6264BDD12006331E6 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A8AF2AF264BDD11006331E6 /* TaskListViewController.swift in Sources */,
+				0AFFA345264C5A2100AC1FB6 /* TaskListViewController+alert.swift in Sources */,
 				0AFFA33E264C1C5000AC1FB6 /* StoreManager.swift in Sources */,
 				0A8AF2AB264BDD11006331E6 /* AppDelegate.swift in Sources */,
 				0A8AF2B5264BDD11006331E6 /* TodoList.xcdatamodeld in Sources */,
@@ -279,7 +323,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TodoList/Info.plist;
+				INFOPLIST_FILE = TodoList/Supporting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -297,7 +341,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TodoList/Info.plist;
+				INFOPLIST_FILE = TodoList/Supporting/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
