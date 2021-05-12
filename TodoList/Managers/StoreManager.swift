@@ -42,12 +42,12 @@ class StoreManager {
         guard let task = NSManagedObject(entity: entityDescription, insertInto: persistentContainer.viewContext) as? Task else { return }
         
         task.title = data
-        saveData(context: persistentContainer.viewContext)
+        saveData()
     }
     
     func delete( data: Task) {
         persistentContainer.viewContext.delete(data)
-        saveData(context: persistentContainer.viewContext)
+        saveData()
     }
     
     func change(in task: String?, at index: Int) {
@@ -56,16 +56,16 @@ class StoreManager {
         selectedTask.title = task
         
         tasks.insert(selectedTask, at: index)
-        saveData(context: persistentContainer.viewContext)
+        saveData()
     }
     
-    private func saveData(context: NSManagedObjectContext) {
-        if context.hasChanges {
+    private func saveData() {
+        if persistentContainer.viewContext.hasChanges {
             do {
-                try context.save()
+                try persistentContainer.viewContext.save()
             } catch let error {
                 print(error)
             }
         }
-    }  
+    }
 }
