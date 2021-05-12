@@ -10,7 +10,7 @@ import UIKit
 class TaskListViewController: UITableViewController {
     
     private let cell = "Cell"
-    private var taskList: [Task] = []
+    private var taskList = StoreManager.shared.fetchData()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,19 +41,25 @@ class TaskListViewController: UITableViewController {
             target: self,
             action: #selector(addNewTask)
         )
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(addNewTask))
+        navigationItem.leftBarButtonItem = self.editButtonItem
         
         navigationController?.navigationBar.tintColor = .white
     }
     
     @objc private func addNewTask() {
         showAlert(with: "New Task", and: "What do you want to do?")
+        
     }
     
     private func showAlert(with title: String, and message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Save", style: .default) { _ in
             guard let task = alert.textFields?.first?.text, !task.isEmpty else { return }
+            StoreManager.shared.save(data: task)
+            self.taskList = StoreManager.shared.fetchData()
+            
+            let cellIndex = IndexPath(row: self.taskList.count - 1, section: 0)
+            self.tableView.insertRows(at: [cellIndex], with: .automatic)
             
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
@@ -81,6 +87,18 @@ extension TaskListViewController {
         cell.contentConfiguration = content
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let task = taskList.remove(at: indexPath.row)
+            StoreManager.shared.delete(data: task)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }
 

@@ -36,4 +36,36 @@ class StoreManager {
         }
         return tasks
     }
+    
+    func save(data: String) {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Task", in: persistentContainer.viewContext) else { return }
+        guard let task = NSManagedObject(entity: entityDescription, insertInto: persistentContainer.viewContext) as? Task else { return }
+        
+        task.title = data
+        saveData(context: persistentContainer.viewContext)
+    }
+    
+    func delete( data: Task) {
+        persistentContainer.viewContext.delete(data)
+        saveData(context: persistentContainer.viewContext)
+    }
+    
+    private func saveData(context: NSManagedObjectContext) {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch let error {
+                print(error)
+            }
+        }
+    }
+    //need to change
+    func edit(in text: String?, at index: Int) {
+        var tasks = fetchData()
+        let selectedTask = tasks.remove(at: index)
+        selectedTask.title = text
+        
+        tasks.insert(selectedTask, at: index)
+        saveData(context: persistentContainer.viewContext)
+    }
 }
