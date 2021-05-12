@@ -16,10 +16,11 @@ class TaskListViewController: UITableViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cell)
+        
         setUpNavigationBar()
     }
 
-
+//MARK: Set Up Navigation bar
     private func setUpNavigationBar() {
         
         title = "Task List"
@@ -59,6 +60,7 @@ class TaskListViewController: UITableViewController {
 
 //MARK: - UITableViewDataSource
 extension TaskListViewController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         taskList.count
     }
@@ -66,6 +68,7 @@ extension TaskListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath)
         let task = taskList[indexPath.row]
+        
         var content = cell.defaultContentConfiguration()
         content.text = task.title
         cell.contentConfiguration = content
@@ -87,7 +90,7 @@ extension TaskListViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showAlert(with: "Edit task", and: "What do you need to change?") { task in
-            StoreManager.shared.edit(in: task, at: indexPath.row)
+            StoreManager.shared.change(in: task, at: indexPath.row)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
     }

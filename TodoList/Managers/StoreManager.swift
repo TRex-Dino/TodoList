@@ -50,6 +50,15 @@ class StoreManager {
         saveData(context: persistentContainer.viewContext)
     }
     
+    func change(in task: String?, at index: Int) {
+        var tasks = fetchData()
+        let selectedTask = tasks.remove(at: index)
+        selectedTask.title = task
+        
+        tasks.insert(selectedTask, at: index)
+        saveData(context: persistentContainer.viewContext)
+    }
+    
     private func saveData(context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
@@ -58,14 +67,5 @@ class StoreManager {
                 print(error)
             }
         }
-    }
-    //need to change
-    func edit(in text: String?, at index: Int) {
-        var tasks = fetchData()
-        let selectedTask = tasks.remove(at: index)
-        selectedTask.title = text
-        
-        tasks.insert(selectedTask, at: index)
-        saveData(context: persistentContainer.viewContext)
-    }
+    }  
 }
