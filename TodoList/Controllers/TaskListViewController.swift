@@ -93,6 +93,7 @@ extension TaskListViewController {
             StoreManager.shared.change(in: task, at: indexPath.row)
             tableView.reloadRows(at: [indexPath], with: .automatic)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
